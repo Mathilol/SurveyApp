@@ -10,7 +10,7 @@
     "react-scripts": "3.0.1"
   },
   "engines": {
-    "node": "10.16.1",
+    "node": "10.16.0",
     "npm": "6.9.0"
   },
   "scripts": {
