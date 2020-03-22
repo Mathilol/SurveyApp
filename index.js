@@ -3,15 +3,18 @@ const mongoose = require("mongoose");
 const keys = require("./config/keys");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
-const bodyPaser = require("body-parser");
-require("./models/user");
+const bodyParser = require("body-parser");
+require("./models/User");
 require("./services/passport");
+require("./models/Survey");
 
 mongoose.connect(keys.mongoURI);
+/* mongoose.connect(
+);*/
 
 const app = express();
 
-app.use(bodyPaser.json());
+app.use(bodyParser.json());
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -21,8 +24,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// link the routes to the app
 require("./routes/authRoutes")(app);
 require("./routes/billingRoutes")(app);
+require("./routes/surveyRoutes")(app);
 
 if ((process.env.NODE_ENV = "production")) {
   //express will serve up production assets like main.js or main.css
